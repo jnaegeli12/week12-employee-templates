@@ -1,0 +1,21 @@
+{
+  "name": "employee-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "4.17.1",
+    "inquirer": "7.3.3",
+    "mysql": "2.18.1",
+    "console-table": "0.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "author": "jnaegeli12",
+  "license": "MIT"
+}
