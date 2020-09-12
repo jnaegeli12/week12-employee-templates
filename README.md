@@ -18,7 +18,7 @@ Use `npm install` to install the dependencies. This application requires:
 After downloading files from Github, you can use the Schema.sql file to build a database in MySQL Workbench. It is written to connect via the MySQL NPM package. Use seeds.sql to build in some dummy data if you wish. It works best if you load departments, roles, and employees separately in that order.
 Run this application in your terminal by typing `node app.js` and answering the inquirer prompts. When you are finished, be sure to choose `Quit` as your final function to end the MySQL connection.
 ## Demonstration
-[Demo Video](https://drive.google.com/file/d/1zf1W8L--FT4H2I1zIlkCFm4ClZBchPIA/view?usp=sharing)
+[Demo Video](https://drive.google.com/file/d/1HUfJn14mLWkfrkMQ5WqfCUe6u54qvK0B/view)
 ## License
 ![License Badge](https://img.shields.io/badge/license-MIT-blue)
 

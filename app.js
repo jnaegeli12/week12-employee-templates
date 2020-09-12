@@ -89,9 +89,9 @@ function viewAllRoles() {
     INNER JOIN department ON roles.department_id = department.id
     LEFT JOIN employee ON employee.role_id = roles.id;`, function (err, res) {
         if (err) throw err;
-
         console.log('\n');
         console.table(res);
+        console.log('\n');
     });
 
     startPrompt();
@@ -100,9 +100,9 @@ function viewAllRoles() {
 function viewAllDepartments() {
     connection.query(`SELECT department.name AS department FROM department ORDER BY name`, function (err, res) {
         if (err) throw err;
-
         console.log('\n');
         console.table(res);
+        console.log('\n');
     });
 
     startPrompt();
@@ -130,9 +130,9 @@ async function viewAllEmployees() {
         LEFT JOIN employee manager on manager.id = employee.manager_id
         ORDER BY ${answers.order}`, function (err, res) {
             if (err) throw err;
-    
             console.log('\n');
             console.table(res);
+            console.log('\n');
     
             startPrompt();
         });
@@ -169,7 +169,7 @@ async function addRole() {
     ]).then(answers => {
         connection.query("INSERT INTO roles SET ?", answers);
         console.log("New role added!");
-
+        console.log('\n');
         startPrompt();
     })
 };
@@ -185,6 +185,7 @@ function addDepartment() {
         });
 
         console.log('Department added!');
+        console.log('\n');
         startPrompt();
     })
 }
@@ -333,5 +334,6 @@ function quit() {
     connection.end(function (err) {
         if (err) throw err;
         console.log("The connection is now terminated.");
+        console.log('\n');
     });
 }
