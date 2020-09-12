@@ -108,21 +108,35 @@ function viewAllDepartments() {
     startPrompt();
 }
 
-function viewAllEmployees() {
-    connection.query(`SELECT employee.id, employee.first_name, employee.last_name, roles.title, department.name AS department, roles.salary, 
-    CONCAT(manager.first_name, ' ', manager.last_name) AS manager 
-    FROM employee 
-    LEFT JOIN roles on employee.role_id = roles.id 
-    LEFT JOIN department on roles.department_id = department.id 
-    LEFT JOIN employee manager on manager.id = employee.manager_id
-    ORDER BY employee.last_name`, function (err, res) {
-        if (err) throw err;
-
-        console.log('\n');
-        console.table(res);
-
-        startPrompt();
-    });
+async function viewAllEmployees() {
+    await inquirer.prompt([{
+        type: "list",
+        name: "order",
+        message: "By what category do you want to order your table?",
+        choices: [
+            "employee.id",
+            "employee.last_name",
+            "roles.title",
+            "department.name",
+            "roles.salary",
+            "manager"
+        ]
+    }]).then(answers => {
+        connection.query(`SELECT employee.id, employee.first_name, employee.last_name, roles.title, department.name AS department, roles.salary, 
+        CONCAT(manager.first_name, ' ', manager.last_name) AS manager 
+        FROM employee 
+        LEFT JOIN roles on employee.role_id = roles.id 
+        LEFT JOIN department on roles.department_id = department.id 
+        LEFT JOIN employee manager on manager.id = employee.manager_id
+        ORDER BY ${answers.order}`, function (err, res) {
+            if (err) throw err;
+    
+            console.log('\n');
+            console.table(res);
+    
+            startPrompt();
+        });
+    })
 };
 
 async function addRole() {
@@ -130,9 +144,16 @@ async function addRole() {
     let departmentChoices = await deptArray.map(({id, name}) => ({name: name, value: id}));
 
     await inquirer.prompt([{
-            type: "input",
+            type: "list",
             name: "title",
-            message: "Role Title:"
+            message: "Role Title:",
+            choices: [
+                "Director",
+                "Manager",
+                "Coordinator",
+                "Specialist",
+                "Assistant"
+            ]
         },
         {
             type: "list",
